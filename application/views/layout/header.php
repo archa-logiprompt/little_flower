@@ -2368,6 +2368,7 @@
                                         $this->rbac->hasPrivilege('books', 'can_add') ||
                                         $this->rbac->hasPrivilege('issue_return_student', 'can_view') ||
                                         $this->rbac->hasPrivilege('add_staff_member', 'can_view') ||
+                                          $this->rbac->hasPrivilege('issue_report', 'can_view') ||
                                         $this->rbac->hasPrivilege('add_student', 'can_view')
                                     )
                                 ) {
@@ -2405,12 +2406,23 @@
                                                         </a>
                                                     </li>
                                                 <?php } ?>
+
                                                 <?php if ($this->rbac->hasPrivilege('add_student', 'can_view')) { ?>
                                                     <li class="<?php echo set_Submenu('member/student'); ?>"><a href="<?php echo base_url(); ?>admin/member/student"><i class="fa fa-angle-double-right"></i>
                                                             <?php echo $this->lang->line('add_student'); ?>
                                                         </a>
                                                     </li>
                                                 <?php } ?>
+                                                
+                                                <?php if ($this->rbac->hasPrivilege('issue_report', 'can_view')) { ?>
+                                                    <li class="<?php echo set_Submenu('member/issue_report'); ?>"><a
+                                                                    href="<?php echo base_url(); ?>admin/member/issue_report"><i
+                                                                        class="fa fa-angle-double-right"></i><?php echo ('Issue Report'); ?></a>
+                                                            </li>
+                                                <?php } ?>
+                                                
+
+                                                
                                                 <?php if ($this->rbac->hasPrivilege('add_staff_member', 'can_view')) { ?>
                                                     <li class="<?php echo set_Submenu('member/teacher'); ?>"><a href="<?php echo base_url(); ?>admin/member/teacher"><i class="fa fa-angle-double-right"></i>
                                                             <?php echo $this->lang->line('add_staff_member'); ?>

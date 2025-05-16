@@ -16,32 +16,49 @@ class Book_model extends CI_Model {
      * @param int $id
      * @return mixed
      */
-    public function get($id = null) {
-        $this->db->select()->from('booklist');
-        if ($id != null) {
-            $this->db->where('booklist.id', $id);
-        } else {
-            $this->db->order_by('booklist.id');
-        }
+public function get($id = null)
+{
+    $admin = $this->session->userdata('admin');
+
+    $this->db->select('booklist.*, IFNULL(book_count.total_issue, 0) as total_issue');
+    $this->db->from('booklist');
+    $this->db->join(
+        '(SELECT COUNT(*) as total_issue, book_id FROM book_issues WHERE is_returned = 0 GROUP BY book_id) as book_count',
+        'booklist.id = book_count.book_id',
+        'left'
+    );
+
+    $this->db->where('booklist.centre_id', $admin['centre_id']);
+    $this->db->where('booklist.qty > IFNULL(book_count.total_issue, 0)');
+
+    if ($id != null) {
+        $this->db->where('booklist.id', $id);
         $query = $this->db->get();
-        if ($id != null) {
-            return $query->row_array();
-        } else {
-            return $query->result_array();
-        }
+        return $query->row_array();
+    } else {
+        $this->db->order_by('booklist.id');
+        $query = $this->db->get();
+        return $query->result_array();
     }
+}
 
-    public function getall()
-    {
 
-    }
+   
 
   public function getBookwithQty()
     {
         
         $admin=$this->session->userdata('admin');
-        $sql = "SELECT booklist.*,IFNULL(total_issue, '0') as `total_issue` FROM booklist LEFT JOIN (SELECT COUNT(*) as `total_issue`, book_id from book_issues  where is_returned= 0 GROUP by book_id) as `book_count` on booklist.id=book_count.book_id where booklist.centre_id=".$admin['centre_id'];
-
+        // $sql = "SELECT booklist.*,IFNULL(total_issue, '0') as `total_issue` FROM booklist LEFT JOIN (SELECT COUNT(*) as `total_issue`, book_id from book_issues  where is_returned= 0 GROUP by book_id) as `book_count` on booklist.id=book_count.book_id where booklist.centre_id=".$admin['centre_id'];
+$sql = "SELECT booklist.*, IFNULL(total_issue, '0') as total_issue
+            FROM booklist
+            LEFT JOIN (
+                SELECT COUNT(*) as total_issue, book_id
+                FROM book_issues
+                WHERE is_returned = 0
+                GROUP BY book_id
+            ) as book_count
+            ON booklist.id = book_count.book_id";
         $query = $this->db->query($sql);
         
         if ($query->num_rows() > 0) {

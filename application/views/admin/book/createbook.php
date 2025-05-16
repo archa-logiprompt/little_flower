@@ -92,6 +92,11 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                 <input id="copyright_year" name="copyright_year"  placeholder="" type="text" class="form-control"  value="<?php echo set_value('copyright_year'); ?>" />
                                 <span class="text-danger"><?php echo form_error('copyright_year'); ?></span>
                             </div>
+                            <div class="form-group col-md-6">
+                                <label for="exampleInputEmail1"><?php echo "Quantity" ?></label>
+                                <input id="qty" name="qty"  placeholder="" type="text" class="form-control"  value="<?php echo set_value('qty'); ?>" />
+                                <span class="text-danger"><?php echo form_error('qty'); ?></span>
+                            </div>
                              <div class="form-group col-md-6">
                                 <label for="exampleInputEmail1"><?php echo "Category Code" ?></label>
                                 <input id="category_code" name="category_code"  placeholder="" type="text" class="form-control"  value="<?php echo set_value('category_code'); ?>" />

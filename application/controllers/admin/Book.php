@@ -75,6 +75,8 @@ class Book extends Admin_Controller {
                 'publisher' => $this->input->post('publisher'),
                 'place' => $this->input->post('place'),
                 'copyright_year' => $this->input->post('copyright_year'),
+                'qty' => $this->input->post('qty'),
+
                 'category_code' => $this->input->post('category_code'),
                 'created_at'       => date('Y-m-d H:i:s')
 
@@ -118,6 +120,8 @@ class Book extends Admin_Controller {
                 'publisher' => $this->input->post('publisher'),
                 'place' => $this->input->post('place'),
                 'copyright_year' => $this->input->post('copyright_year'),
+                'qty' => $this->input->post('qty'),
+
                 'category_code' => $this->input->post('category_code'),
             );
             $this->book_model->addbooks($data);
@@ -273,6 +277,8 @@ class Book extends Admin_Controller {
                 'copyright_year'   => isset($data[10]) ? $data[10] : '',
                 'category_code'    => isset($data[11]) ? $data[11] : '',
                 'centre_id'    => isset($data[12]) ? $data[12] : '',
+                'qty'    => isset($data[13]) ? $data[13] : '',
+
 
                 'created_at'       => date('Y-m-d H:i:s')
             );

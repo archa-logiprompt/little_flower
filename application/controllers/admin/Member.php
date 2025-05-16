@@ -27,6 +27,18 @@ class Member extends Admin_Controller
         $this->load->view('admin/librarian/index', $data);
         $this->load->view('layout/footer');
     }
+      public function issue_report()
+    {
+        $this->session->set_userdata('top_menu', 'Library');
+        $this->session->set_userdata('sub_menu', 'member/issue_report');
+        $data['title'] = 'Issue Return';
+        $issued_books = $this->bookissue_model->getAllMemberBooks();
+      
+        $data['issued_books'] = $issued_books;
+        $this->load->view('layout/header', $data);
+        $this->load->view('admin/member/issuereport', $data);
+        $this->load->view('layout/footer', $data);
+    }
 
     public function issue($id)
     {
