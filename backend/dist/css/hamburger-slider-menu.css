@@ -1,0 +1,252 @@
+
+/* Hamburger Menu  START*/
+
+.hamburger-menu {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: white;
+    float: left;
+}
+
+.hamburger-menu i {
+    font-size: 18px;
+}
+
+.modal-backdrop {
+    z-index: 1020;
+}
+
+.hamburgerModal .searchBox {
+    margin-bottom: 2rem;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px; */
+}
+
+.hamburgerModal .dropdown-menu {
+    min-width: 140px;
+}
+
+.hamburgerModal .modal-header {
+    border-top: solid;
+    border-bottom: unset;
+    border-color: #a9101a;
+    background-color: transparent;
+    background: transparent;
+}
+
+.hamburgerModal .modal-header .close {
+    color: #a9101a;
+}
+
+.hamburgerModal .searchBox .form-control {
+    height: 40px;
+}
+
+.menu-card-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+@media (min-width: 992px) {
+    .menu-card-row {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media (min-width: 1200px) {
+    .modal-lg {
+        /* width: 1040px; */
+    }
+}
+
+.menu-card-col {
+    text-align: center;
+    /* border-top: solid; */
+    /* border-top-color: #faa21c; */
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    min-height: 150px;
+}
+
+.menu-card-col:hover,
+.menu-card-col:focus {
+    background-color: #faa21c;
+    transition: all .5s ease !important;
+}
+
+.menu-card-col>i {
+    margin-bottom: 1rem;
+    font-size: 46px;
+}
+
+.menu-card-col:hover i {
+    color: white;
+}
+
+.menu-card-col .dropdown {
+    display: flex;
+    justify-content: center;
+}
+
+.menu-card-col .dropdown a {
+    color: black;
+    font-size: 14px;
+}
+
+.menu-card-col:hover .dropdown a {
+    color: white;
+}
+
+.menu-card-col:hover .dropdown-menu a,
+.menu-card-col:hover .dropdown-menu i {
+    color: black;
+}
+
+.menu-card-col .dropdown-menu {
+    right: auto;
+    font-size: 12px;
+}
+
+.menu-card-col .dropdown-menu>li>a {
+    padding: 3px 10px !important;
+    white-space: normal !important;
+}
+
+.menu-card-col .dropdown-menu>li>a>i {
+    margin-right: 4px;
+}
+.menu-card-col .dropdown-menu .active a{
+    background-color: rgba(66, 66, 66, 0.23);
+}
+
+/* Hamburger Menu  END*/
+
+/* Sliding New Hamburger Menu START */
+
+.sidebar-menu-panel {
+    position: fixed;
+    width: 100%;
+    right: -100%;
+    top: 0;
+    bottom: 0;
+    background: white;
+    /* opacity: 0; */
+    z-index: 999;
+    padding: 5rem 0rem 1rem 0rem;
+    transition: all .5s ease-in-out;
+}
+
+.sidebar-menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgb(0 0 0 / 65%);
+    z-index: 0;
+    opacity: 0;
+    visibility: hidden;
+    cursor: pointer;
+}
+
+.sidebar-menu-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.sidebar-menu-panel.open {
+    right: 0;
+    /* opacity: 1; */
+}
+
+.sidebar-menu-panel::after {
+    position: absolute;
+    content: '';
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background-color: #faa21c;
+}
+
+.menu-card-col.active{
+    background-color: #faa21c;
+}
+
+.sidebar-menu-panel>.sidebar-menu-container {
+    height: 100%;
+    overflow-y: auto;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.sidebar-menu-panel .searchBox {
+    margin-bottom: 2rem;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px; */
+}
+
+.sidebar-menu-panel .dropdown-menu {
+    min-width: 140px;
+}
+
+.sidebar-menu-panel .searchBox .form-control {
+    height: 40px;
+}
+
+.sidebar-menu-panel .menu-card-col .dropdown-menu {
+    right: 0;
+    font-size: 12px;
+}
+
+.sidebar-menu-close {
+
+    background-color: #faa21c;
+    position: absolute;
+    top: 0;
+    /* left: -44px; */
+    right: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.sidebar-menu-close i {
+    padding: 1.6rem;
+    font-size: 18px;
+    color: white;
+}
+
+/* Custom CSS to adjust open dropdown position */
+.menu-card-col .dropdown .dropdown-menu {
+    position: absolute;
+    transform: translate3d(0, 0, 0);
+    top: 100%;
+    left: 0;
+    will-change: transform;
+  }
+
+@media (min-width: 992px) {
+    .sidebar-menu-panel {
+        padding: 4rem; 
+        width: 90%;
+    }
+    .sidebar-menu-close {
+        left: -44px;
+        right: auto;
+    }
+}
+
+/* Sliding New Hamburger Menu END */
+
+.streached-link::after{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    content: "";
+}
