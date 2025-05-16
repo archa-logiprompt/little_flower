@@ -761,4 +761,65 @@ public function import_subject()
          $this->load->view('admin/subject/import_subject');
          $this->load->view('layout/footer');
 		 }
+public function topicexcel()
+{
+    $this->load->model('Subject_model');
+    $this->load->model('Topic_model');
+
+    $data['subjects'] = $this->Subject_model->get_all_subjects();
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $this->load->library('upload');
+
+        $config['upload_path'] = './uploads/excel/';
+        $config['allowed_types'] = 'csv'; 
+        $config['max_size'] = 2048;
+        $config['encrypt_name'] = TRUE;
+
+        if (!is_dir($config['upload_path'])) {
+            mkdir($config['upload_path'], 0777, true);
+        }
+
+        $this->upload->initialize($config);
+
+        if (!$this->upload->do_upload('documents')) {
+            $data['error'] = $this->upload->display_errors();
+        } else {
+            $upload_data = $this->upload->data();
+            $file_path = $config['upload_path'] . $upload_data['file_name'];
+
+            if (($handle = fopen($file_path, "r")) !== FALSE) {
+                $insertData = [];
+                $rowNumber = 0;
+                while (($row = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                    $rowNumber++;
+                    if ($rowNumber == 1) continue; 
+                    if (!empty($row[0])) {
+                        $insertData[] = [
+                            'subject_id' => $this->input->post('subject'),
+                            'topic' => $row[0],
+                        ];
+                    }
+                }
+                fclose($handle);
+
+              if (!empty($insertData)) {
+    $this->Topic_model->insert_topics($insertData);
+    $this->session->set_flashdata('msg', '<div class="alert alert-success">Topics imported successfully!</div>');
+    redirect('admin/subject/topicexcel');
+} else {
+    $this->session->set_flashdata('msg', '<div class="alert alert-danger">CSV file is empty or missing topics.</div>');
+    redirect('admin/subject/topicexcel');
+} 
+            } else {
+                $data['error'] = "Could not open the uploaded CSV file.";
+            }
+        }
+    }
+    $this->load->view('layout/header');
+    $this->load->view('admin/subject/topicexcel', $data);
+    $this->load->view('layout/footer');
+}
+
+
 }

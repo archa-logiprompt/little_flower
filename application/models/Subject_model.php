@@ -198,5 +198,8 @@ public function get($id = null) {
 	 
 	 }
 	
-
+ public function get_all_subjects() {
+        $query = $this->db->get('subjects');
+        return $query->result();
+    }
 }

@@ -233,6 +233,13 @@
                                                     <li class="<?php echo set_Submenu('admin/teacher/assign_class_teacher'); ?>"><a href="<?php echo base_url(); ?>admin/teacher/assign_class_teacher"><i class="fa fa-angle-double-right"></i>
                                                             <?php echo $this->lang->line('assign_class_teacher'); ?>
                                                         </a></li>
+                                                         <?php
+                                                }
+                                                if ($this->rbac->hasPrivilege('topicexcel', 'can_view')) {
+                                                ?>
+                                                    <li class="<?php echo set_Submenu(''); ?>"><a href="<?php echo base_url(); ?>admin/subject/topicexcel"><i class="fa fa-angle-double-right"></i>
+                                                              <?php echo 'Topic Excel'; ?>
+                                                        </a></li>
                                                 <?php
                                                 }
                                                 if ($this->rbac->hasPrivilege('weekly_calendar', 'can_view')) {

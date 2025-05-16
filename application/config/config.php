@@ -71,6 +71,7 @@ $config['uri_protocol'] = 'REQUEST_URI';
   | https://codeigniter.com/user_guide/general/urls.html
  */
 $config['url_suffix'] = '';
+$config['composer_autoload'] = TRUE; // or the path to your vendor/autoload.php
 
 /*
   |--------------------------------------------------------------------------
