@@ -37,7 +37,6 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                     <tr>
                                         <th><?php echo $this->lang->line('book_title'); ?></th>
                                         <th><?php echo $this->lang->line('book_no'); ?></th>
-                                        <th><?php echo $this->lang->line('isbn_no'); ?></th>
                                         <th><?php echo $this->lang->line('publisher'); ?>
                                         </th>
                                         <th><?php echo $this->lang->line('author'); ?>
@@ -47,8 +46,6 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                         
                                         <th><?php echo $this->lang->line('qty'); ?></th>
                                         <th><?php echo $this->lang->line('available'); ?></th>
-                                        <th><?php echo $this->lang->line('bookprice'); ?></th>
-                                        <th><?php echo $this->lang->line('postdate'); ?></th>
                                         <th class="no-print text text-right"><?php echo $this->lang->line('action'); ?></th>
                                     </tr>
                                 </thead>
@@ -62,32 +59,16 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                         <tr>
                                             <td class="mailbox-name">
                                                 <a href="#" data-toggle="popover" class="detail_popover"><?php echo $book['title'] ?></a>
-                                                <div class="fee_detail_popover" style="display: none">
-                                                    <?php
-                                                    if ($book['description'] == "") {
-                                                        ?>
-                                                        <p class="text text-danger"><?php echo $this->lang->line('no_description'); ?></p>
-                                                        <?php
-                                                    } else {
-                                                        ?>
-                                                        <p class="text text-info"><?php echo $book['description']; ?></p>
-                                                        <?php
-                                                    }
-                                                    ?>
-                                                </div>
+                                                
                                             </td>
                                             <td class="mailbox-name"> <?php echo $book['book_no'] ?></td>
-                                            <td class="mailbox-name"> <?php echo $book['isbn'] ?></td>
                                             <td class="mailbox-name"> <?php echo $book['publisher'] ?></td>
                                             <td class="mailbox-name"> <?php echo $book['author'] ?></td>
-                                            <td class="mailbox-name"><?php echo $book['copyright_year'] ?></td>
                                             <td class="mailbox-name"><?php echo $book['copyright_year'] ?></td>
                                             <td class="mailbox-name"><?php echo $book['category_code'] ?></td>
 
                                             <td class="mailbox-name"> <?php echo $book['qty'] ?></td>
                                             <td class="mailbox-name"> <?php echo $book['qty']-$book['total_issue'] ?></td>
-                                            <td class="mailbox-name"> <?php echo ($currency_symbol . $book['perunitcost']); ?></td>
-                                            <td class="mailbox-name"> <?php echo date($this->customlib->getSchoolDateFormat(), $this->customlib->dateyyyymmddTodateformat($book['postdate'])); ?></td>
                                             <td class="mailbox-date no-print text text-right">
                                                 <?php if ($this->rbac->hasPrivilege('books', 'can_edit')) { ?> 
                                                     <a href="<?php echo base_url(); ?>admin/book/edit/<?php echo $book['id'] ?>" class="btn btn-default btn-xs"  data-toggle="tooltip" title="<?php echo $this->lang->line('edit'); ?>">

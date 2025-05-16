@@ -45,6 +45,15 @@ class Bookissue_model extends CI_Model
         $this->db->delete('book_issues');
     }
 
+    public function getAllMemberBooks()
+    {
+        $this->db->select('book_issues.id,book_issues.return_date,book_issues.issue_date,book_issues.is_returned,booklist.title,booklist.book_no,booklist.author,students.firstname,booklist.barcode')->join('students','students.id=book_issues.member_id')->from('book_issues');
+        $this->db->join('booklist', 'booklist.id = book_issues.book_id', 'left');
+
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
     public function add($data)
     {
 // var_dump($data);exit;
