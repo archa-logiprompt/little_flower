@@ -69,21 +69,107 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
 
                                             <td class="mailbox-name"> <?php echo $book['qty'] ?></td>
                                             <td class="mailbox-name"> <?php echo $book['qty']-$book['total_issue'] ?></td>
-                                            <td class="mailbox-date no-print text text-right">
-                                                <?php if ($this->rbac->hasPrivilege('books', 'can_edit')) { ?> 
-                                                    <a href="<?php echo base_url(); ?>admin/book/edit/<?php echo $book['id'] ?>" class="btn btn-default btn-xs"  data-toggle="tooltip" title="<?php echo $this->lang->line('edit'); ?>">
-                                                        <i class="fa fa-pencil"></i>
-                                                    </a>
-                                                <?php }if ($this->rbac->hasPrivilege('books', 'can_delete')) { ?> 
-                                                    <a href="<?php echo base_url(); ?>admin/book/delete/<?php echo $book['id'] ?>"class="btn btn-default btn-xs"  data-toggle="tooltip" title="<?php echo $this->lang->line('delete'); ?>" onclick="return confirm('<?php echo $this->lang->line('delete_confirm') ?>');">
-                                                        <i class="fa fa-remove"></i>
-                                                    </a>
-                                                <?php } ?>
-                                            </td>
+                                           
+                                           <?php
+$admin = $this->session->userdata('admin');
+
+if ($admin['centre_id'] == 1) {
+?>
+   <td class="mailbox-date no-print text text-right">
+    <?php
+    $admin = $this->session->userdata('admin');
+
+    if (
+        $this->rbac->hasPrivilege('books', 'can_edit') &&
+        $admin['roles']['Librarian'] == '4' &&
+        $admin['centre_id'] == $book['centre_id']
+    ) {
+    ?>
+        <a href="<?php echo base_url(); ?>admin/book/edit/<?php echo $book['id'] ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="<?php echo $this->lang->line('edit'); ?>">
+            <i class="fa fa-pencil"></i>
+        </a>
+    <?php } ?>
+
+    <?php
+    if (
+        $this->rbac->hasPrivilege('books', 'can_delete') &&
+        $admin['roles']['Librarian'] == '4' &&
+        $admin['centre_id'] == $book['centre_id']
+    ) {
+    ?>
+        <a href="<?php echo base_url(); ?>admin/book/delete/<?php echo $book['id'] ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="<?php echo $this->lang->line('delete'); ?>" onclick="return confirm('<?php echo $this->lang->line('delete_confirm') ?>');">
+            <i class="fa fa-remove"></i>
+        </a>
+    <?php } ?>
+</td>
+<?php
+} elseif ($admin['centre_id'] == 4) {
+?>
+   <td class="mailbox-date no-print text text-right">
+    <?php
+    $admin = $this->session->userdata('admin');
+// var_dump( $admin['centre_id'] == $book['centre_id']);exit;
+    if (
+        $this->rbac->hasPrivilege('books', 'can_edit') &&
+         $admin['roles']['Librarian'] == '58' &&
+        $admin['centre_id'] == $book['centre_id']
+    ) {
+    ?>
+        <a href="<?php echo base_url(); ?>admin/book/edit/<?php echo $book['id'] ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="<?php echo $this->lang->line('edit'); ?>">
+            <i class="fa fa-pencil"></i>
+        </a>
+    <?php } ?>
+
+    <?php
+    if (
+        $this->rbac->hasPrivilege('books', 'can_delete') &&
+         $admin['roles']['Librarian'] == '58' &&
+        $admin['centre_id'] == $book['centre_id']
+    ) {
+    ?>
+        <a href="<?php echo base_url(); ?>admin/book/delete/<?php echo $book['id'] ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="<?php echo $this->lang->line('delete'); ?>" onclick="return confirm('<?php echo $this->lang->line('delete_confirm') ?>');">
+            <i class="fa fa-remove"></i>
+        </a>
+    <?php } ?>
+</td>
+<?php
+} else {
+?>
+    <td class="mailbox-date no-print text text-right">
+    <?php
+    $admin = $this->session->userdata('admin');
+
+    if (
+        $this->rbac->hasPrivilege('books', 'can_edit') &&
+         $admin['roles']['Librarian'] == '50' &&
+        $admin['centre_id'] == $book['centre_id']
+    ) {
+    ?>
+        <a href="<?php echo base_url(); ?>admin/book/edit/<?php echo $book['id'] ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="<?php echo $this->lang->line('edit'); ?>">
+            <i class="fa fa-pencil"></i>
+        </a>
+    <?php } ?>
+
+    <?php
+    if (
+        $this->rbac->hasPrivilege('books', 'can_delete') &&
+           $admin['roles']['Librarian'] == '50' &&
+        $admin['centre_id'] == $book['centre_id']
+    ) {
+    ?>
+        <a href="<?php echo base_url(); ?>admin/book/delete/<?php echo $book['id'] ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="<?php echo $this->lang->line('delete'); ?>" onclick="return confirm('<?php echo $this->lang->line('delete_confirm') ?>');">
+            <i class="fa fa-remove"></i>
+        </a>
+    <?php } ?>
+</td>
+<?php } ?>
+
+
                                         </tr>
                                         <?php
                                         $count++;
                                     } }
+                                
                                     ?>
                                 </tbody>
                             </table><!-- /.table -->

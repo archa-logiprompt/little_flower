@@ -4,7 +4,7 @@
 
     <section class="content-header">
         <h1>
-            <i class="fa fa-usd"></i> <?php echo $this->lang->line('book'); ?></h1>
+            <i class="fa fa-book"></i> <?php echo $this->lang->line('book'); ?></h1>
     </section>
 
     <!-- Main content -->
@@ -13,15 +13,18 @@
             <?php
             if ($this->rbac->hasPrivilege('file_reader', 'can_add')) {
                 ?>
+                
                 <div class="col-md-4">
                     <!-- Horizontal Form -->
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <h3 class="box-title"> <?php echo $this->lang->line('book'); ?></h3>
                         </div><!-- /.box-header -->
-
-          <form id="form1" action="<?php echo base_url() ?>admin/book/read_file"  id="employeeform" name="employeeform" method="post"  enctype="multipart/form-data">
+                        <form id="form1" action="<?php echo base_url() ?>admin/book/read_file"  id="employeeform" name="employeeform" method="post"  enctype="multipart/form-data">
                             <div class="box-body">
+                                <a href="<?php echo base_url('uploads/sample_book_file.csv'); ?>" class="btn btn-sm btn-success" style="margin-bottom: 10px;" download>
+                                        <i class="fa fa-download"></i> Download Sample File
+                                    </a>
                                 <?php if ($this->session->flashdata('msg')) { ?>
                                     <?php echo $this->session->flashdata('msg') ?>
                                 <?php } ?>

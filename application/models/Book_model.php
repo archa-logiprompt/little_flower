@@ -73,7 +73,7 @@ $sql = "SELECT booklist.*, IFNULL(total_issue, '0') as total_issue
      */
     public function remove($id) {
         $this->db->where('id', $id);
-        $this->db->delete('books');
+        $this->db->delete('booklist');
     }
 
     /**
