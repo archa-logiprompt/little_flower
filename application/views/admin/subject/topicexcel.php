@@ -17,6 +17,9 @@
                     </div>                  
                     <form id="form1" action="" name="topicform" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                         <div class="box-body">
+                             <a href="<?php echo base_url('uploads/sample_topic_format.csv'); ?>" class="btn btn-sm btn-success" style="margin-bottom: 10px;" download>
+                                                          <i class="fa fa-download"></i> Download Sample File
+                                                      </a>
                             <?php if ($this->session->flashdata('msg')) { ?>
                                 <?php echo $this->session->flashdata('msg') ?>
                             <?php } ?>

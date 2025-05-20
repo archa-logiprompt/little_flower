@@ -197,9 +197,20 @@ public function get($id = null) {
 	$this->db->insert('subjects',$subject); 
 	 
 	 }
+     public function get_all_subjects() {
+    $admin = $this->session->userdata('admin');
+    $centre_id = $admin['centre_id'];
+
+    $this->db->where('centre_id', $centre_id);
+    $this->db->order_by('subjects.name');
+    $query = $this->db->get('subjects');
+
+    return $query->result();
+}
+
 	
- public function get_all_subjects() {
-        $query = $this->db->get('subjects');
-        return $query->result();
-    }
+//  public function get_all_subjects() {
+//         $query = $this->db->get('subjects');
+//         return $query->result();
+//     }
 }
