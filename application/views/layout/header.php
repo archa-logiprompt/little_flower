@@ -725,6 +725,8 @@
                                         $this->rbac->hasPrivilege('approve_leave_by_class_coordinator', 'can_view') ||
                                         $this->rbac->hasPrivilege('approve_leave_request_ug/pg', 'can_view') ||
                                $this->rbac->hasPrivilege('assigned_staff', 'can_view') ||
+                               $this->rbac->hasPrivilege('principal_review', 'can_view') ||
+
 
                                         //    $this->rbac->hasPrivilege('hr_report', 'can_view') ||
                                         //    $this->rbac->hasPrivilege('supervisor_leave', 'can_view') ||
@@ -779,6 +781,15 @@
 
                                                     <li class="<?php echo set_Submenu('admin/payroll'); ?>"><a href="<?php echo base_url(); ?>admin/payroll"><i class="fa fa-angle-double-right"></i>
                                                             <?php echo $this->lang->line('payroll'); ?>
+                                                        </a></li>
+                                                <?php
+                                                }
+                                                if ($this->rbac->hasPrivilege('principal_review', 'can_view')) {
+                                                ?>
+
+
+                                                    <li class="<?php echo set_Submenu('admin/principal_review'); ?>"><a href="<?php echo base_url(); ?>admin/principal_review/index"><i class="fa fa-angle-double-right"></i>
+                                                            <?php echo "Principal Review of staff"?>
                                                         </a></li>
                                                 <?php
                                                 }
