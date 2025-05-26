@@ -413,7 +413,7 @@ class Staff_model extends CI_Model
 
 
         $query = $this->db->select("staff.*,staff_designation.designation,department.department_name as department,roles.name as user_type")->join('staff_designation', "staff_designation.id = staff.designation", "left")->join('staff_roles', "staff_roles.staff_id = staff.id", "left")->join('roles', "roles.id = staff_roles.role_id", "left")->join('department', "department.id = staff.department", "left")->where("staff.is_active", $active)->where('staff.centre_id', $centre_id)->where("roles.name", $role)->get("staff");
-
+// echo $this->db->last_query();exit;
         return $query->result_array();
     }
 

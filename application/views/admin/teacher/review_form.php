@@ -47,8 +47,9 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                     <?php
                                     $count = 1;
 									if(isset($staff_list)){
+                                      
                                     foreach($staff_list as $staff) {
-                                       
+                                     
                                         ?>
                                         <tr>
                                             <td class="mailbox-name">
@@ -57,8 +58,9 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                             </td>
                                             <td class="mailbox-name"> <?php echo $staff['employee_id'] ?></td>
                                             <td class="mailbox-name"> <?php echo $staff['designation'] ?></td>
+                                           
                                           <td>
-    <?php if ($staff['status']=="reviewed_by_principal"): ?>
+    <?php if ($staff['status']=='reviewed_by_principal'): ?>
         <button class="btn btn-success btn-sm" disabled>Reviewed</button>
     <?php else: ?>
         <a href="<?php echo base_url('admin/principal_review/review_form/' . $staff['id']); ?>" class="btn btn-primary btn-sm">Review</a>

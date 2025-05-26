@@ -310,6 +310,9 @@
                                         <li class="<?php echo set_Topmenu('Teachers'); ?>"><a href="<?php echo base_url(); ?>user/teacher"><i class="fa fa-user-secret"></i>
                                                 <?php echo $this->lang->line('teachers'); ?>
                                             </a></li>
+                                             <li class="<?php echo set_Topmenu('Review Form'); ?>"><a href="<?php echo base_url(); ?>user/teacher/review_form"><i class="fa fa-user-secret"></i>
+                                                <?php echo "Teacher Review" ?>
+                                            </a></li>
                                     </ul>
 
                                 </div>

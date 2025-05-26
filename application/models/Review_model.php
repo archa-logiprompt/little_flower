@@ -21,7 +21,11 @@ class Review_model extends CI_Model {
         // var_dump("hi");exit;
          $this->db->insert('staff_reviews', $data);
     }
-	
+	public function student_save_review_score($data)
+    {
+        // var_dump("hi");exit;
+         $this->db->insert('student_staff_reviews', $data);
+    }
 	
 
 }

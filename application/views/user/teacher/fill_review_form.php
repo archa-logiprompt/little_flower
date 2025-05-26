@@ -45,9 +45,9 @@
                     </div>
                     <div id="printcontent">
 
-                        <h3 class="text-center">Staff Performance Review</h3>
+                        <h3 class="text-center">Student Side Staff Performance Review</h3>
 
-                        <form method="post" action="<?php echo base_url('admin/principal_review/save_review'); ?>">
+                        <form method="post" action="<?php echo base_url('user/teacher/save_review'); ?>">
                             <input type="hidden" name="staff_id" value="<?php echo $staff_list['id']; ?>">
                             <table class="table table-bordered">
 
@@ -62,60 +62,56 @@
                                     <th>Designation</th>
                                     <td><?php echo $staff_list['designation']; ?></td>
                                     <th>Department</th>
-                                    <td><?php echo $staff_list['department']; ?></td>
+                                    <td><?php echo $staff_list['department_name']; ?></td>
                                 </tr>
 
                             </table>
 
-                            <table class="table table-striped table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Sl No</th>
-                                        <th>Criteria</th>
-                                        <th>Excellent (10)</th>
-                                        <th>Very Good (8)</th>
-                                        <th>Good (6)</th>
-                                        <th>Average (4)</th>
-                                        <th>Below Average (2)</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $criteria = [
-                                        "Attendance (No Loss of Pay)",
-                                        "Duty Timing (No Late Coming)",
-                                        "Vigilant/ Active in Duty (Cautious)",
-                                        "Helping Mentality",
-                                        "Knowledge in Profession",
-                                        "Dedication/ Loyalty",
-                                        "Cooperation (Relationship with Colleagues)",
-                                        "Work Load (Effort)",
-                                        "Politeness (Attitude)",
-                                        "Intelligent",
-                                        "Activeness in Duty",
-                                        "Quality of Student Care",
-                                        "Behaviour with Co-workers",
-                                        "Computer Knowledge",
-                                        "Leadership Quality/Responsibility",
-                                        "Obedient to Superiors",
-                                        "Dress code/ Neatness",
-                                        "Institutions’ rules following level",
-                                        "Flexibility (Cooperation in difficult situations)",
-                                        "Character"
-                                    ];
+                        <table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Sl No</th>
+            <th>Criteria</th>
+            <th>Average (1)</th>
+            <th>Above Average (2)</th>
+            <th>Good (3)</th>
+            <th>Very Good (4)</th>
+            <th>Excellent (5)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        $criteria = [
+            "Teacher prepares and organizes the class well",
+            "Teacher knows the subject well",
+            "Teacher is flexible in accommodating for individual student needs",
+            "Teacher allows the student to ask questions and encourage active participation in the class",
+            "Teacher uses various teaching methods and appropriate AV aids",
+            "Teacher delivers lectures at the level of students understanding with examples",
+            "Teacher prepares the students for both theory and practical examinations",
+            "Teacher treats students impartially",
+            "Teacher listens and understands students problems",
+            "Teacher is approachable for corrections and guidance",
+            "Teacher encourages and appreciates students creativity",
+            "Teacher encourages and motivates the students for new learning",
+            "Teacher is punctual",
+            "Completes the allotted portions on time",
+            "Teacher’s communication skills"
+        ];
 
-                                    foreach ($criteria as $index => $criterion) {
-                                        echo '<tr>';
-                                        echo '<td>' . ($index + 1) . '</td>';
-                                        echo '<td>' . $criterion . '</td>';
-                                        foreach ([10, 8, 6, 4, 2] as $score) {
-                                            echo '<td><input type="radio" name="criteria[' . $index . ']" value="' . $score . '" ></td>';
-                                        }
-                                        echo '</tr>';
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
+        foreach ($criteria as $index => $criterion) {
+            echo '<tr>';
+            echo '<td>' . ($index + 1) . '</td>';
+            echo '<td>' . $criterion . '</td>';
+            for ($score = 1; $score <= 5; $score++) {
+                echo '<td><input type="radio" name="criteria[' . $index . ']" value="' . $score . '" ></td>';
+            }
+            echo '</tr>';
+        }
+        ?>
+    </tbody>
+</table>
+
 
                             <div class="text-center mb-5">
                                 <button type="submit" class="btn btn-success">Submit Review</button>

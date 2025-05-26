@@ -7,6 +7,9 @@ class Teacher extends Student_Controller {
 
     function __construct() {
         parent::__construct();
+         $this->load->model('review_model');
+
+
     }
 
     function index() {
@@ -214,7 +217,68 @@ class Teacher extends Student_Controller {
             redirect('admin/teacher/index');
         }
     }
+    function review_form()
+    {
 
+         $this->session->set_userdata('top_menu', 'Teachers');
+        $this->session->set_userdata('sub_menu', 'teacher/index');
+        $data['title'] = 'Add Teacher';
+        $teacher_result = $this->staff_model->getEmployeeStudent('Teacher');
+        // var_dump($teacher_result);exit;
+
+        $data['teacherlist'] = $teacher_result;
+       
+        $this->load->view('layout/student/header', $data);
+        $this->load->view('user/teacher/review_form', $data);
+        $this->load->view('layout/student/footer', $data);
+      
+    }
+
+    function fill_review($id)
+    {
+        $data["staff_id"] = "";
+        $data["name"] = "";
+        // $admin = $this->session->userdata('admin');
+        $staff_list=$this->db->select('staff.*,staff_designation.id as did,staff_designation.designation,department.id as did,department.department_name')->from('staff')->join('department','staff.department=department.id')->join('staff_designation','staff_designation.id =staff.designation ')->where('staff.id',$id)->get()->row_array();
+        // echo $this->db->last_query();exit;
+        $data['staff_list']=$staff_list;
+        // var_dump(  $data['staff_list']);exit;
+            $this->load->view("layout/student/header", $data);
+           $this->load->view("user/teacher/fill_review_form", $data);
+           $this->load->view("layout/student/footer", $data);
+
+    }
+    function save_review()
+    {
+    $staff_id = $this->input->post('staff_id');
+    $criteria_scores = $this->input->post('criteria');
+
+    if (!empty($staff_id) && !empty($criteria_scores)) {
+        foreach ($criteria_scores as $criteria_index => $score) {
+            $data = array(
+                'staff_id'       => $staff_id,
+                'criteria_index' => $criteria_index,
+                'score'          => $score, 
+                'review_date'    => date('Y-m-d H:i:s'),
+            );
+
+
+           
+            $this->review_model->student_save_review_score($data);
+        }
+           
+         $this->db->where('id', $staff_id);
+        $this->db->update('staff', ['status' => 'reviewed_by_student']);
+
+        $this->session->set_flashdata('msg', 'Review submitted successfully!');
+    } else {
+        $this->session->set_flashdata('msg', 'Invalid review submission.');
+    }
+
+    redirect('user/teacher/review_form');
 }
+    }
+
+
 
 ?>
