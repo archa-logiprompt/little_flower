@@ -793,6 +793,16 @@
                                                         </a></li>
                                                 <?php
                                                 }
+                                                  if ($this->rbac->hasPrivilege('principal_review_report', 'can_view')) {
+                                                ?>
+
+
+                                                    <li class="<?php echo set_Submenu('admin/principal_review/principal_review_report'); ?>"><a href="<?php echo base_url(); ?>admin/principal_review/principal_review_report"><i class="fa fa-angle-double-right"></i>
+                                                            <?php echo "Principal Review Report of staff"?>
+                                                        </a></li>
+                                                <?php
+                                                }
+
                                                 if ($this->rbac->hasPrivilege('payroll_report', 'can_view')) {
                                                 ?>
                                                     <li class="<?php echo set_Submenu('admin/payroll/payrollreport'); ?>"><a href="<?php echo base_url(); ?>admin/payroll/payrollreport"><i class="fa fa-angle-double-right"></i>

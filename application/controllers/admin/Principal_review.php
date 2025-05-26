@@ -90,5 +90,57 @@ class principal_review extends Admin_Controller
     redirect('admin/principal_review');
 }
 
+public function principal_review_report()
+{
+   
+   
+        if (!$this->rbac->hasPrivilege('staff_attendance_report', 'can_view')) {
+            access_denied();
+        }
+        $this->session->set_userdata('top_menu', 'HR');
+        $this->session->set_userdata('sub_menu', 'admin/principal_review/principal_review_report');
+      
+
+        $staff_list = $this->staff_model->getstafflist();
+        $data['staff_list'] =  $staff_list;
+
+        $data['title'] = 'Attendance Report';
+        $search = $this->input->post('search');
+      if ($search == 'search') {
+    $this->form_validation->set_rules('staff', 'Staff Name', 'trim|required|xss_clean');
+
+    if ($this->form_validation->run() == FALSE) {
+        $this->load->view('layout/header', $data);
+        $this->load->view('admin/principal_review/report', $data);
+        $this->load->view('layout/footer', $data);
+    } else {
+        $staff = $this->input->post('staff');
+
+       $staffDetails = $this->db->select('staff_reviews.*, staff.id AS sid, staff.name, staff.surname')
+    ->from('staff_reviews')
+    ->join('staff', 'staff.id = staff_reviews.staff_id')
+    
+    ->where('staff_reviews.staff_id', $staff)
+    ->get()->result_array();
+
+
+        // echo $this->db->last_query(); exit;
+
+        $data['staffDetails'] = $staffDetails;
+
+        $this->load->view('layout/header', $data);
+        $this->load->view('admin/principal_review/report', $data);
+        $this->load->view('layout/footer', $data);
+    }
+} else {
+    // Show default view if not searching
+
+    $this->load->view('layout/header', $data);
+    $this->load->view('admin/principal_review/report', $data);
+    $this->load->view('layout/footer', $data);
+}
+}
+
+
 }
 ?>

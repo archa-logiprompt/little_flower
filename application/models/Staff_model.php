@@ -8,7 +8,12 @@ class Staff_model extends CI_Model
         parent::__construct();
     }
 
-    public function get($id = null)
+ public function getstafflist()
+    {
+        $result = $this->db->select('staff.*')->from('staff')->get()->result_array();
+
+        return $result;
+    }    public function get($id = null)
     {
 
         $this->db->select('staff.*,roles.name as user_type,roles.id as role_id')->from('staff')->join("staff_roles", "staff_roles.staff_id = staff.id", "left")->join("roles", "staff_roles.role_id = roles.id", "left");
