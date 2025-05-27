@@ -726,6 +726,10 @@
                                         $this->rbac->hasPrivilege('approve_leave_request_ug/pg', 'can_view') ||
                                $this->rbac->hasPrivilege('assigned_staff', 'can_view') ||
                                $this->rbac->hasPrivilege('principal_review', 'can_view') ||
+                               $this->rbac->hasPrivilege('principal_view_student_review', 'can_view') ||
+                               $this->rbac->hasPrivilege('principal_review_report', 'can_view') ||
+
+
 
 
                                         //    $this->rbac->hasPrivilege('hr_report', 'can_view') ||
@@ -799,6 +803,15 @@
 
                                                     <li class="<?php echo set_Submenu('admin/principal_review/principal_review_report'); ?>"><a href="<?php echo base_url(); ?>admin/principal_review/principal_review_report"><i class="fa fa-angle-double-right"></i>
                                                             <?php echo "Principal Review Report of staff"?>
+                                                        </a></li>
+                                                <?php
+                                                }
+                                                   if ($this->rbac->hasPrivilege('principal_view_student_review', 'can_view')) {
+                                                ?>
+
+
+                                                    <li class="<?php echo set_Submenu('admin/principal_review/principal_view_student_review_report'); ?>"><a href="<?php echo base_url(); ?>admin/principal_review/principal_view_student_review_report"><i class="fa fa-angle-double-right"></i>
+                                                            <?php echo "Student review teacher Report"?>
                                                         </a></li>
                                                 <?php
                                                 }
