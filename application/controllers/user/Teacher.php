@@ -252,18 +252,22 @@ class Teacher extends Student_Controller {
     {
     $staff_id = $this->input->post('staff_id');
     $criteria_scores = $this->input->post('criteria');
-
+    // var_dump($data['student']);exit;
     if (!empty($staff_id) && !empty($criteria_scores)) {
         foreach ($criteria_scores as $criteria_index => $score) {
+            $student_id = $this->customlib->getStudentSessionUserID();
+                $student = $this->student_model->get($student_id);
+                $data['student']=$student['id'];
             $data = array(
                 'staff_id'       => $staff_id,
                 'criteria_index' => $criteria_index,
                 'score'          => $score, 
+                'student_id'    =>  $data['student'],
                 'review_date'    => date('Y-m-d H:i:s'),
             );
 
 
-           
+        //    var_dump($data);
             $this->review_model->student_save_review_score($data);
         }
            

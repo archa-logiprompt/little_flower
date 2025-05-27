@@ -91,22 +91,14 @@
                             class="btn btn-sm btn-primary login-submit-cs fa fa-print pull-right">
                         Print View
                     </button>
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true"><i class="fa fa-list"></i> <?php echo $this->lang->line('list'); ?> <?php echo $this->lang->line('view'); ?></a></li>
-                            <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false"><i class="fa fa-newspaper-o"></i> <?php echo $this->lang->line('details'); ?> <?php echo $this->lang->line('view'); ?></a></li>
-                        </ul>
+                       
  
 
 
                             <div id='collection_report'>
                         <div  id="printcontent">
-                            <!--<div class="download_label">-->
-                            <!--    <?php echo $this->Setting_model->getCurrentSchoolName(); ?>-->
-
-                            <!--    <?php echo "Review Report of " . $staffDetails . " for the month of " . $month_selected . " " . $year_selected; ?>-->
-                            <!--</div>-->
+                            
                             <div class="tab-pane active table-responsive no-padding" id="tab_1">
-                                <!--<h3 class="text-center"><?php echo $this->Setting_model->getCurrentSchoolName(); ?></h3>-->
                                 <h3 style="text-align:center">
                                     <br>
                                     <?php echo "Review Report of " . $staffDetails[0]['name']  ?>
@@ -293,26 +285,21 @@
 </script>
 <script type="text/javascript">
 $(document).on('click', '#collection_print', function () {
-    
-    // Get the class value from the data attribute of the button
     let content = $('#printcontent').html();
-    content = btoa(content); 
-    // Make an AJAX request to the 'printwithheaderandfooter' method
+
+    // Encode content as base64 safely
+    let encodedContent = btoa(unescape(encodeURIComponent(content)));
+
     $.ajax({
         url: '<?php echo base_url('admin/weeklycalendarnew/printwithheaderandfooter'); ?>',
-        method: 'post', 
+        method: 'POST',
         data: {
-            data: content
+            data: encodedContent  // Send encoded content
         },
-         beforeSend: function (xhr) {
-        xhr.setRequestHeader('Content-Encoding', 'gzip');
-    },
-        
         success: function (data) {
-            console.log(data)
-           data =  data.replace(/['"]+/g, '')
-            // Redirect to the generated PDF URL
-           window.open("<?php echo base_url() ?>" + data, '_blank');
+            console.log(data);
+            data = data.replace(/['"]+/g, '');
+            window.open("<?php echo base_url(); ?>" + data, '_blank');
         },
         error: function (xhr, status, error) {
             console.error('xhr:', xhr);
@@ -321,5 +308,4 @@ $(document).on('click', '#collection_print', function () {
         }
     });
 });
-
 </script>
